@@ -1,0 +1,28 @@
+import React from 'react';
+import {View, StyleSheet, Text} from 'react-native';
+
+{/*start functional component*/}
+const Header = (props) => {
+return (
+    <View style={styles.header}>
+        <Text style={styles.headerTitle}>{props.title}</Text>
+    </View>
+);
+}//end of the functional component
+
+{/*react native style code */}
+const styles = StyleSheet.create({
+    header:{
+        backgroundColor:'#f2f2f2',
+        padding: 15,
+    },
+    headerTitle:{
+        marginTop:40,
+        textAlign: 'center',
+        fontSize:20,
+    }
+});
+{/*end of the native style code */}
+
+{/*export component for output*/}
+export default Header;
