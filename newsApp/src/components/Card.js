@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, Platform} from 'react-native'
+import {StyleSheet, Text, View, Image} from 'react-native'
 
 {/*start functional component*/}
 const Card = () => {
@@ -7,7 +7,11 @@ const Card = () => {
         <View style={styles.card}>
 
     <View style={styles.imageWrapper}>
-
+    <Image 
+     source={require('../../assets/demo-image.jpg')}
+    // source={{uri:'https://amirconstructionbd.com/public/eqfeature/225%20Ton%20All%20Terrain%20Crane.jpg'}}
+        style={styles.image}
+    />
     </View>
 
     <View style={styles.titleWrapper}>
@@ -41,6 +45,10 @@ const styles = StyleSheet.create({
         borderTopLeftRadius:10,
         borderTopRightRadius:10,
         overflow: 'hidden',
+    },
+    image:{
+        width:'100%',
+        height:'100%',
     },
     titleWrapper:{
         height:'10%',
