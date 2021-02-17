@@ -8,18 +8,18 @@ const Card = () => {
 
     <View style={styles.imageWrapper}>
     <Image 
-     source={require('../../assets/demo-image.jpg')}
+     source={require('../../assets/images/demo-image.jpg')}
     // source={{uri:'https://amirconstructionbd.com/public/eqfeature/225%20Ton%20All%20Terrain%20Crane.jpg'}}
         style={styles.image}
     />
     </View>
 
     <View style={styles.titleWrapper}>
-        <Text>Dummy Title</Text>
+        <Text style={styles.title}>Dummy Title</Text>
     </View>
 
     <View style={styles.descriptionWrapper}>
-    <Text>This is a Dummy Description</Text>
+    <Text style={styles.description}>This is a Dummy Description</Text>
     </View>
 
     </View>
@@ -27,6 +27,7 @@ const Card = () => {
 }
 {/*end of the functional component*/}
 
+{/*react-native style code*/}
 const styles = StyleSheet.create({
     card:{
         backgroundColor: '#ffffff',
@@ -54,7 +55,14 @@ const styles = StyleSheet.create({
         height:'10%',
         paddingHorizontal:15
     },
+    title:{
+        fontSize:20,
+        marginTop: 10
+    },
     descriptionWrapper:{
+        marginTop:10
+    },
+    description:{
         paddingHorizontal:15
     }
 })

@@ -1,5 +1,8 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19000
+  "packagerPort": 19000,
+  "expoServerNgrokUrl": "https://bt-srx.anonymous.newsapp.exp.direct",
+  "packagerNgrokUrl": "https://packager.bt-srx.anonymous.newsapp.exp.direct",
+  "ngrokPid": 22976
 }

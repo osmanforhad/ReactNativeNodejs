@@ -11,6 +11,7 @@ const Header = () => {
 }
 {/*end of the functional component*/}
 
+{/*react-native style code*/}
 const styles = StyleSheet.create({
     header:{
         backgroundColor: Platform.OS === 'android' ? '#72bcd4' : '#ffffff',
