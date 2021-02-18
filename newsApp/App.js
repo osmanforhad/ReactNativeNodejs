@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import * as Font from 'expo-font';
 
 {/*import the Developer Created component */}
 import Header from './src/components/Header';
