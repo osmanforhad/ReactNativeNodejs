@@ -10,5 +10,10 @@ const AboutScreen = () =>{
     );
 }//end of the About Screen function
 
+{/*style code */}
+const styles = StyleSheet.create({
+    
+});//end of the style code
+
 {/*export component function for output */}
 export default AboutScreen;

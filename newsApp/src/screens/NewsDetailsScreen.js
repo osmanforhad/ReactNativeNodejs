@@ -10,5 +10,10 @@ const NewsDetailsScreen = () =>{
     );
 }//end of the NewsDetails function
 
+{/*style code */}
+const styles = StyleSheet.create({
+    
+});//end of the style code
+
 {/*export component function for output */}
 export default NewsDetailsScreen;

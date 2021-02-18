@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 {/*import the Developer Created component */}
-import Header from './src/components/Header';
-import Card from './src/components/Card';
+import NewsListScreen from './src/screens/NewsListScreen';
 
 {/*export component for output */}
 export default function App() {
@@ -12,8 +11,7 @@ export default function App() {
     <View>
 
     {/*include the Developer Created Component */}
-      <Header/>
-      <Card/>
+    <NewsListScreen/>
 
     </View>
   );
