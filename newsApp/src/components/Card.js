@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native'
+import {StyleSheet, Text, View, Image} from 'react-native';
+import {MaterialIcons} from '@expo/vector-icons';
 
 {/*start functional component*/}
 const Card = () => {
@@ -16,6 +17,7 @@ const Card = () => {
 
     <View style={styles.titleWrapper}>
         <Text style={styles.title}>Dummy Title</Text>
+        <MaterialIcons name="favorite-border" color="#72bcd4" size={24}/>
     </View>
 
     <View style={styles.descriptionWrapper}>
@@ -53,7 +55,10 @@ const styles = StyleSheet.create({
     },
     titleWrapper:{
         height:'10%',
-        paddingHorizontal:15
+        paddingHorizontal:15,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     title:{
         fontSize:20,
