@@ -1,22 +1,17 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 {/*import the Developer Created component */}
-import Header from '../components/Header';
 import Card from '../components/Card';
 
 {/*start function for NewsList */}
 const NewsListScreen = () =>{
     return(
 <View>
-
-    {/*include the Developer Created Component */}
-    <Header/>
-      <Card/>
-
+  <Card/>
 </View>
     );
-}//end of the NewsList function
+}//end of the NewsDetails function
 
 {/*style code */}
 const styles = StyleSheet.create({
