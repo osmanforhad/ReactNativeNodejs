@@ -1,10 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons';
 
 {/*start functional component*/}
-const Card = () => {
+const Card = props => {
+
     return(
+        <TouchableOpacity onPress={() => props.navigation.navigate('NewsDetails')}>
         <View style={styles.card}>
 
     <View style={styles.imageWrapper}>
@@ -25,6 +27,7 @@ const Card = () => {
     </View>
 
     </View>
+    </TouchableOpacity>
     );
 }
 {/*end of the functional component*/}

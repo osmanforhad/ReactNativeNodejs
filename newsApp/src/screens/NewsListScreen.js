@@ -1,15 +1,16 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 
 {/*import the Developer Created component */}
 import Card from '../components/Card';
 
 {/*start function for NewsList */}
-const NewsListScreen = () =>{
+const NewsListScreen = props =>{
+  
     return(
-<View>
-  <Card/>
-</View>
+      
+          <Card navigation={props.navigation} />
+      
     );
 }//end of the NewsDetails function
 
