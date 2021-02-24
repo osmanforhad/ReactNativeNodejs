@@ -32,7 +32,7 @@ export default function(state=initialState, action) {
             } else {
                 // item doesn't exist in favorites
                 {/*gets the article for add to favorite */}
-                const article = state.articles.find(article => article.url === action.payload)
+                const article = state.articles.articles.find(article => article.url === action.payload)
 
                 {/*for add to favorite */}
                 return{

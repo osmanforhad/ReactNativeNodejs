@@ -18,7 +18,7 @@ const NewsListScreen = props =>{
         dispatch(newsAction.fetchArticles())
     }, [dispatch]);
 
-     {/*select the state which need right now */}
+     {/*for return the item from news api */}
     const {articles} = useSelector(state => state.news.articles);
     console.log(articles);
   
@@ -32,6 +32,7 @@ const NewsListScreen = props =>{
                 title={item.title}
                 image={item.urlToImage}
                 description={item.description}
+                url={item.url}
             />
           )}
       />
