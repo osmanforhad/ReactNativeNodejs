@@ -1,8 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons';
-import {useDispatch} from 'react-redux';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 {/*import the Developer Created component */}
 import * as newsAction from '../redux/actions/newsAction';
@@ -23,14 +22,14 @@ const Card = props => {
     <View style={styles.imageWrapper}>
     <Image 
      //source={require('../../assets/images/demo-image.jpg')}
-     source={{uri:props.image}}
+     source={{uri:props.image ? props.image : require('../../assets/images/demo-image.jpg') }}
         style={styles.image}
     />
     </View>
 
     <View style={styles.titleWrapper}>
         <Text style={styles.title}>
-        {props.title.length > 32 ? props.title.slice(0, 32) + '...' : props.title}
+        {props.title && props.title.length > 32 ? props.title.slice(0, 32) + '...' : props.title}
         </Text>
         <MaterialIcons
          name={isFav ? 'favorite' : 'favorite-border'} 
@@ -44,7 +43,7 @@ const Card = props => {
 
     <View style={styles.descriptionWrapper}>
     <Text style={styles.description}>
-    {props.description.length > 200 ? props.description.slice(0, 200) + '...' : props.description}
+    {props.description && props.description.length > 200 ? props.description.slice(0, 200) + '...' : props.description}
     </Text>
     </View>
 
