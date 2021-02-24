@@ -1,8 +1,8 @@
 {/*export action object */}
 export const FETCH_ARTICLES = "FETCH_ARTICLES";
-export const ADD_FAVORITES = "ADD_FAVORITES";
+export const TOGGLE_FAVORITES = "TOGGLE_FAVORITES";
 
-{/* function for export object */}
+{/* function for fetch news data */}
 export const fetchArticles = () => {
     return async dispatch => {
 
@@ -17,3 +17,11 @@ export const fetchArticles = () => {
         });
     }
 }//end of the fetchArticles function
+
+{/* function for add remove favorites */}
+export const toggleFavorites = url => {
+    return {
+        type: TOGGLE_FAVORITES,
+        payload: url
+    }
+}//end of the toggleFavorites function
