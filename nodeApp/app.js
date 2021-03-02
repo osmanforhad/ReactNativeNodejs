@@ -9,7 +9,10 @@ function oddEvenChecker(number) {
         return number + " is an Odd Number"
     }
 } //end of the oddEvenChecker method
-number = addNumbers(4, 6);
-console.log('The result is:' + number);
 
-console.log(oddEvenChecker('So : ' + number));
+//declare a variable nad call the function and pass the paramiter
+numbers = addNumbers(4, 6);
+
+console.log('The result is:' + numbers);
+
+console.log(oddEvenChecker('So : ' + numbers));
