@@ -11,5 +11,7 @@ function oddEvenChecker(number) {
 } //end of the oddEvenChecker method
 
 //export function for out put
-module.exports.addNumbers = addNumbers;
-module.exports.oddEvenChecker = oddEvenChecker;
+module.exports = {
+        addNumbers,
+        oddEvenChecker
+    } //end of the export module functions
