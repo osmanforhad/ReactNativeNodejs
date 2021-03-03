@@ -87,6 +87,20 @@ app.put('/api/listing/:id', (req, res) => {
     res.send(home);
 })
 
+//delete a resource
+app.delete('/api/listing/:id', (req, res) => {
+    //fetch the data from homes array
+    const home = homes.find(home => home.id === parseInt(req.params.id));
+    if (!home) {
+        return res.status(404).send('The home with given ID is not found');
+    }
+
+    //remove the item
+    const index = homes.indexOf(home);
+    homes.splice(index, 1);
+    res.send(home);
+})
+
 /**
  * excess the env file with specific variable
  * and if not deinfe port in the env
