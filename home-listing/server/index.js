@@ -31,6 +31,17 @@ app.get('/api/listing', (req, res) => {
     res.send(homes);
 })
 
+//get data using the route paramiter
+app.get('/api/listing/:id', (req, res) => {
+    //get the data from home array
+    const home = homes.find(home => home.id === parseInt(req.params.id));
+    if (!home) {
+        res.status(404).send('The home with given ID is not found');
+    }
+    //return the data as paramiter calling
+    res.send(home);
+})
+
 /**
  * excess the env file with specific variable
  * and if not deinfe port in the env
