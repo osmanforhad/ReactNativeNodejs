@@ -66,6 +66,26 @@ app.post('/api/listing', (req, res) => {
     res.send(home);
 })
 
+//update resource using put request
+app.put('/api/listing/:id', (req, res) => {
+    //fetch the data from homes array
+    const home = homes.find(home => home.id === parseInt(req.params.id));
+    if (!home) {
+        return res.status(404).send('The home with given ID is not found');
+    }
+
+    //input validation
+    if (!req.body.type || !req.body.description) {
+        //return a message
+        return res.status(400).send('Type and Description is required');
+    }
+
+    //override the property
+    home.type = req.body.type,
+        home.description = req.body.description
+
+    res.send(home);
+})
 
 /**
  * excess the env file with specific variable
