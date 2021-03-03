@@ -4,6 +4,9 @@ const express = require('express');
 //initial the express package
 const app = express();
 
+//initial the middleware
+app.use(express.json());
+
 //include .env file
 require('dotenv').config();
 
@@ -31,9 +34,9 @@ app.get('/api/listing', (req, res) => {
     res.send(homes);
 })
 
-//get data using the route paramiter
+//fetch data using the route paramiter
 app.get('/api/listing/:id', (req, res) => {
-    //get the data from home array
+    //fetch the data from homes array
     const home = homes.find(home => home.id === parseInt(req.params.id));
     if (!home) {
         res.status(404).send('The home with given ID is not found');
@@ -41,6 +44,28 @@ app.get('/api/listing/:id', (req, res) => {
     //return the data as paramiter calling
     res.send(home);
 })
+
+//making a post request to create new resource
+app.post('/api/listing', (req, res) => {
+
+    //input validation
+    if (!req.body.type || !req.body.description) {
+        //return a message
+        return res.status(400).send('Type and Description is required');
+    }
+
+    //create an object
+    const home = {
+        id: homes.length + 1,
+        type: req.body.type,
+        description: req.body.description
+    }
+
+    homes.push(home);
+    //return data
+    res.send(home);
+})
+
 
 /**
  * excess the env file with specific variable
