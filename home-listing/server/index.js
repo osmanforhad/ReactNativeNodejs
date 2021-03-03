@@ -7,6 +7,19 @@ const app = express();
 //include .env file
 require('dotenv').config();
 
+//create an array of object
+const homes = [{
+        id: 1,
+        type: 'Apartment',
+        description: 'Well furnished appartment'
+    },
+    {
+        id: 2,
+        type: 'Flat',
+        description: 'Well furnished flat at flateville'
+    }
+]
+
 //define the get express request server
 app.get('/', (req, res) => {
     res.send('Wellcome to Express');
@@ -14,7 +27,8 @@ app.get('/', (req, res) => {
 
 //define the route
 app.get('/api/listing', (req, res) => {
-    res.send([{ id: 1, roomType: "Duplex" }, { id: 2, roomType: 'Flat' }]);
+    //return the array data
+    res.send(homes);
 })
 
 /**
