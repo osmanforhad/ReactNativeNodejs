@@ -7,7 +7,7 @@ const server = http.createServer((req, res) => {
     //defien an array
     const movies = [
         { id: 1, name: 'Titanic' },
-        { id: 2, name: 'Early Bird' }
+        { id: 2, name: 'Early Bird 2' }
     ]
 
     if (req.url == '/') {
