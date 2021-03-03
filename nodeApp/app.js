@@ -1,25 +1,15 @@
-//define the event class
-const EventEmitter = require('events');
+//define the http module
+const http = require('http');
 
-//cretae the instance of the event class
-const emitter = new EventEmitter();
-
-//register an event
-emitter.on('greeting', (arg) => {
-    console.log('This is the event class', arg.name);
+//create server
+const server = http.createServer((req, res) => {
+    if (req.url == '/') {
+        res.write('Welcome to the http module');
+        res.end();
+    }
 });
 
-//triger the event
-emitter.emit('greeting', { name: 'osman forhad' });
-
-//file system
-// const fs = require('fs');
-
-// fs.readFile('./test.txt', (err, data) => {
-//     if (err) {
-//         console.log(err);
-//         return;
-//     }
-
-//     console.log(data.toString());
-// })
+//export the server out put
+server.listen(3000, () => {
+    console.log('Web server is running on port 3000');
+})
