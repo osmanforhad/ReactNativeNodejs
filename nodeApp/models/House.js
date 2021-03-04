@@ -11,3 +11,6 @@ const HouseSchema = new mongoose.Schema({
     image: String,
     yearBuilt: Number
 })
+
+//creating Model
+module.exports = mongoose.model('House', HouseSchema);
