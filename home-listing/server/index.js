@@ -1,14 +1,25 @@
-//define the express module
+//import the express package
 const express = require('express');
 
-//define the mongooes module
+//import the mongooes package
 const mongoose = require('mongoose');
+
+//include the developer created package
+const houses = require('./routes/houses');
 
 //initial the express package
 const app = express();
 
 //initial the middleware
 app.use(express.json());
+
+//creating the home route
+app.get('/', (req, res) => {
+    res.send('Welcome to the house listing API');
+});
+
+//creating the houses route using app object
+app.use('/api/houses', houses);
 
 //include .env file
 require('dotenv').config();
