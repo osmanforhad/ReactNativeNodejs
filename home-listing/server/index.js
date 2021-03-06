@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     res.send('Welcome to the house listing API');
 });
 
-//creating the houses route using app object
+//creating the houses route middleware using app object
 app.use('/api/houses', houses);
 
 //include .env file

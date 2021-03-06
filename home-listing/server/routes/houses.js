@@ -22,7 +22,7 @@ const validate = [
     .isNumeric().withMessage('Pricre should be a Number'),
 ]
 
-//defining the routes
+//defining the routes for insert data
 router.post('/', validate, (req, res) => {
     //add validation
     const errors = validationResult(req);
@@ -53,5 +53,13 @@ router.post('/', validate, (req, res) => {
         .catch(err => console.log(err))
 })
 
+//defining route for fetch data from Database  
+router.get('/', (req, res) => {
+    House.find()
+        .then(houses => {
+            res.send(houses)
+        })
+        .catch(err => console.log('err'))
+});
 //export for out put
 module.exports = router;
