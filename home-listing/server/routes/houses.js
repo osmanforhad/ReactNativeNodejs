@@ -53,13 +53,25 @@ router.post('/', validate, (req, res) => {
         .catch(err => console.log(err))
 })
 
-//defining route for fetch data from Database  
+//defining route for fetch all data from Database table  
 router.get('/', (req, res) => {
+    //find data by House model
     House.find()
         .then(houses => {
             res.send(houses)
         })
         .catch(err => console.log('err'))
 });
-//export for out put
+
+//defining route for fetch a singe data using the id from Database table
+router.get('/:id', (req, res) => {
+        const houseId = req.params.id;
+        //find data by House model
+        House.findById(houseId)
+            .then(house => {
+                res.send(house);
+            })
+            .catch(err => console.group(err))
+    })
+    //export for out put
 module.exports = router;
