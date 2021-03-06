@@ -51,7 +51,7 @@ router.post('/', validate, (req, res) => {
             })
         })
         .catch(err => console.log(err))
-})
+});
 
 //defining route for fetch all data from Database table  
 router.get('/', (req, res) => {
@@ -65,13 +65,41 @@ router.get('/', (req, res) => {
 
 //defining route for fetch a singe data using the id from Database table
 router.get('/:id', (req, res) => {
-        const houseId = req.params.id;
-        //find data by House model
-        House.findById(houseId)
-            .then(house => {
-                res.send(house);
-            })
-            .catch(err => console.group(err))
-    })
-    //export for out put
+    //grave the id from user request
+    const houseId = req.params.id;
+    //find data by House model
+    House.findById(houseId)
+        .then(house => {
+            res.send(house);
+        })
+        .catch(err => console.log(err))
+});
+
+//definign route for update data
+router.put('/:id', (req, res) => {
+    //grave the id from user request
+    const houseId = req.params.id;
+    //find data by House model
+    House.findById(houseId)
+        .then(house => {
+            //override the value to update existing data of the requested id
+            house.title = req.body.title;
+            house.address = req.body.address;
+            house.homeType = req.body.homeType;
+            house.description = req.body.description;
+            house.price = req.body.price;
+            house.image = req.body.image;
+            house.yearBuilt = req.body.yearBuilt;
+
+            //update data
+            return house.save();
+        })
+        //for get back the updated result
+        .then(result => {
+            res.send(result)
+        })
+        .catch(err => console.log(err))
+});
+
+//export for out put
 module.exports = router;
