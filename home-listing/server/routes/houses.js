@@ -1,14 +1,36 @@
 //import express package
 const express = require('express');
 
+//import express validator packag
+const { check, validationResult } = require('express-validator');
+
 //import the developer created model package
 const House = require('../models/house');
 
 //initial the router
 const router = express.Router();
 
+//define validation
+const validate = [
+    check('title')
+    .isLength({ min: 3, max: 50 }).withMessage('Title should between 3 to 50 characters'),
+    check('description')
+    .isLength({ min: 10, max: 200 }).withMessage('Description should between 10 to 200 characters'),
+    check('address')
+    .isLength({ min: 10, max: 100 }).withMessage('Address should between 10 to 100 characters'),
+    check('price')
+    .isNumeric().withMessage('Pricre should be a Number'),
+]
+
 //defining the routes
-router.post('/', (req, res) => {
+router.post('/', validate, (req, res) => {
+    //add validation
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).send({ erros: errors.array() })
+    }
+
     //create instance object of House class
     const house = new House({
         title: req.body.title,
