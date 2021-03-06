@@ -107,5 +107,17 @@ router.put('/:id', validate, (req, res) => {
         .catch(err => console.log(err))
 });
 
+//defining route for delete data
+router.delete('/:id', (req, res) => {
+    //grave the id from user request
+    const houseId = req.params.id;
+    //find data by House model
+    House.findByIdAndRemove(houseId)
+        .then(result => {
+            res.send(result);
+        })
+        .catch(err => console.log(err))
+});
+
 //export for out put
 module.exports = router;
