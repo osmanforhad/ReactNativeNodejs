@@ -76,9 +76,15 @@ router.get('/:id', (req, res) => {
 });
 
 //definign route for update data
-router.put('/:id', (req, res) => {
+router.put('/:id', validate, (req, res) => {
     //grave the id from user request
     const houseId = req.params.id;
+    //add validation
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).send({ erros: errors.array() })
+    }
     //find data by House model
     House.findById(houseId)
         .then(house => {
