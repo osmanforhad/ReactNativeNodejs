@@ -1,5 +1,6 @@
-//import express
+//import pcakages
 const express = require('express');
+const mongoose = require('mongoose');
 
 //import the developer created component
 const authRoutes = require('./routes/auth');
@@ -15,5 +16,10 @@ app.get('/', (req, res) => {
 //use middleware for authRoutes
 app.use('/api/users', authRoutes);
 
-//setup the port
-app.listen(3000, () => console.log('Server is running'));
+//connect with mongo DB
+mongoose.connect('mongodb+srv://king_auth:Z9TeRBELeANfzGr8@cluster0.rfrgb.mongodb.net/auth_system?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        //setup the port number
+        app.listen(3000, () => console.log('Server is running'));
+    })
+    .catch(err => console.log(err))
