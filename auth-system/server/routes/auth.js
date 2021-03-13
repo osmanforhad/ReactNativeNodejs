@@ -1,6 +1,7 @@
 //import express
 const express = require('express');
 const { check, validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
 
 //initialize the express Router
 const router = express.Router();
@@ -31,17 +32,25 @@ router.post('/register', validate, async(req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
 
+    //checking the user exists or not
+    const userExist = await User.findOne({ email: req.body.email });
+    if (userExist) return res.status(400).send('Email already exists');
+
+    //generate salt and password Hashing
+    const salt = await bcrypt.genSalt();
+    const hashPassword = await bcrypt.hash(req.body.password, salt)
+
     //create user model instance to save the data
     const user = new User({
         fullName: req.body.fullName,
         email: req.body.email,
-        password: req.body.password
+        password: hashPassword
     })
 
     //svae the user data
     try {
         const savedUser = await user.save();
-        res.send(savedUser);
+        res.send({ id: savedUser._id, fullName: savedUser.fullName, email: savedUser.email });
     } catch (error) {
         res.status(400).send(error);
     }
