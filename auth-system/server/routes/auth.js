@@ -1,5 +1,6 @@
 //import express
 const express = require('express');
+const { check, validationResult } = require('express-validator');
 
 //initialize the express Router
 const router = express.Router();
@@ -7,9 +8,30 @@ const router = express.Router();
 //import the developer created model component
 const User = require('../models/User');
 
+//setup the user input validation
+const validate = [
+    check('fullName')
+    .isLength({ min: 2 })
+    .withMessage('Your full name is required'),
+    check('email')
+    .isEmail()
+    .withMessage('Please provide a valid email'),
+    check('password')
+    .isLength({ min: 6 })
+    .withMessage('Password must be at list 6 character')
+]
+
 //create the register route
-router.post('/register', async(req, res) => {
-    //create user model instance
+router.post('/register', validate, async(req, res) => {
+
+    //checking the validation
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    //create user model instance to save the data
     const user = new User({
         fullName: req.body.fullName,
         email: req.body.email,
