@@ -8,6 +8,9 @@ const authRoutes = require('./routes/auth');
 //initialize the express app
 const app = express();
 
+//define the middle ware as body
+app.use(express.json());
+
 //creating the home route
 app.get('/', (req, res) => {
     res.send('Welcome to the auth system');
