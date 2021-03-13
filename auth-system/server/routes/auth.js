@@ -9,11 +9,21 @@ const router = express.Router();
 //import the developer created model component
 const User = require('../models/User');
 
-//setup the user input validation
+//setup the user input validation for register
 const validate = [
     check('fullName')
     .isLength({ min: 2 })
     .withMessage('Your full name is required'),
+    check('email')
+    .isEmail()
+    .withMessage('Please provide a valid email'),
+    check('password')
+    .isLength({ min: 6 })
+    .withMessage('Password must be at list 6 character')
+]
+
+//setup the user input validation for login
+const loginValidate = [
     check('email')
     .isEmail()
     .withMessage('Please provide a valid email'),
@@ -57,8 +67,25 @@ router.post('/register', validate, async(req, res) => {
 })
 
 //login route
-router.post('/login', (req, res) => {
-    res.send('login route')
+router.post('/login', loginValidate, async(req, res) => {
+
+    //checking the validation
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    //check the email is exists
+    const user = await User.findOne({ email: req.body.email })
+    if (!user) return res.status(404).send('User is not registed')
+
+    //check the password is correct
+    const validPassword = await bcrypt.compare(req.body.password, user.password)
+    if (!validPassword) return res.status(404).send('Invalid Email or Password')
+
+    //send the response if email  exists and password is correct then
+    res.send('Logged in....')
 })
 
 //export router using module
