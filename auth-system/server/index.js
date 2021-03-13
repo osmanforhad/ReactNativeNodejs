@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 //import the developer created component
 const authRoutes = require('./routes/auth');
 
+//inport the middleware which developer created component
+const verifyToken = require('./routes/verifyToken');
+
 //initialize the express app
 const app = express();
 
@@ -14,6 +17,11 @@ app.use(express.json());
 //creating the home route
 app.get('/', (req, res) => {
     res.send('Welcome to the auth system');
+})
+
+//user profile route
+app.get('/api/user/profile', verifyToken, (req, res) => {
+    res.send('This is the user profile')
 })
 
 //use middleware for authRoutes
