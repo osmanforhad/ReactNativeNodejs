@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 
 //user profile route
 app.get('/api/user/profile', verifyToken, (req, res) => {
-    res.send('This is the user profile')
+    res.send({ success: true, data: req.user })
 })
 
 //use middleware for authRoutes

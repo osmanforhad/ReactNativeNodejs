@@ -21,7 +21,18 @@ const validate = [
     check('password')
     .isLength({ min: 6 })
     .withMessage('Password must be at list 6 character')
-]
+];
+
+//method for generate a token
+const generateToken = user => {
+    return jwt.sign({
+            _id: user._id,
+            email: user.email,
+            fullName: user.fullName
+        },
+        "SUPERSECRET123"
+    );
+}
 
 //setup the user input validation for login
 const loginValidate = [
@@ -45,7 +56,7 @@ router.post('/register', validate, async(req, res) => {
 
     //checking the user exists or not
     const userExist = await User.findOne({ email: req.body.email });
-    if (userExist) return res.status(400).send('Email already exists');
+    if (userExist) return res.status(400).send({ success: false, message: 'Email already exists' });
 
     //generate salt and password Hashing
     const salt = await bcrypt.genSalt();
@@ -61,9 +72,19 @@ router.post('/register', validate, async(req, res) => {
     //svae the user data
     try {
         const savedUser = await user.save();
-        res.send({ id: savedUser._id, fullName: savedUser.fullName, email: savedUser.email });
+        //assign a token by calling generateToken method
+        const token = generateToken(user);
+        res.send({
+            success: true,
+            data: {
+                id: savedUser._id,
+                fullName: savedUser.fullName,
+                email: savedUser.email
+            },
+            token
+        });
     } catch (error) {
-        res.status(400).send(error);
+        res.status(400).send({ success: false, error });
     }
 })
 
@@ -79,17 +100,17 @@ router.post('/login', loginValidate, async(req, res) => {
 
     //check the email is exists
     const user = await User.findOne({ email: req.body.email })
-    if (!user) return res.status(404).send('User is not registed')
+    if (!user) return res.status(404).send({ success: false, message: "User is not registed" })
 
     //check the password is correct
     const validPassword = await bcrypt.compare(req.body.password, user.password)
-    if (!validPassword) return res.status(404).send('Invalid Email or Password')
+    if (!validPassword) return res.status(404).send({ success: false, message: "Invalid Email or Password" })
 
-    //create and assign a token
-    const token = jwt.sign({ _id: user._id, email: user.email }, 'SUPERSECRET123')
+    //assign a token by calling generateToken method
+    const token = generateToken(user);
 
     //send the response if email  exists and password is correct then with token header
-    res.header('auth-token', token).send({ message: 'Logged in Successfully', token })
+    res.header('auth-token', token).send({ success: true, message: 'Logged in Successfully', token })
 })
 
 //export router using module
