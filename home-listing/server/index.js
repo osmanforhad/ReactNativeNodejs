@@ -4,11 +4,17 @@ const express = require('express');
 //import the mongooes package
 const mongoose = require('mongoose');
 
+//import the cors package
+const cors = require('cors');
+
 //include the developer created package
 const houses = require('./routes/houses');
 
 //initial the express package
 const app = express();
+
+//use cors as a middleware
+app.use(cors())
 
 //initial the middleware
 app.use(express.json());
@@ -33,7 +39,11 @@ require('dotenv').config();
 const port = process.env.PORT || 3000
 
 //connecting with online mongo DB
-mongoose.connect('mongodb+srv://node_react_native_1:WCGrpS8QAUaYsvyI@cluster0.rfrgb.mongodb.net/house_app?retryWrites=true&w=majority')
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.rfrgb.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`, {
+
+        useUnifiedTopology: true,
+        useNewUrlParser: true
+    })
     .then(result => {
         //export the server out put
         app.listen(port, () => console.log(`Server is running on port ${port}`));
